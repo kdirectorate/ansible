@@ -1,0 +1,14 @@
+# The default settings cause no end of problems with my network's resolver
+# So this makes sure the local resolver goes off to pound nails and
+# lets the network do what I designed it to do. I bet you could get away
+# with just disabling the stub listener, but why not force the DNS too?
+- name: Set DNS and DNSStubListener parameters in resolved.conf
+  lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: "^#?\\s*{{ item.regex }}"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    #- { regex: "DNS=", line: "DNS={{ dns_ip }}" }
+    - { regex: "DNSStubListener=", line: "DNSStubListener=no" }
+  notify: restart systemd-resolved

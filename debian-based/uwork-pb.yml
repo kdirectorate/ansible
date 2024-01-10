@@ -1,0 +1,26 @@
+- name: Configure Workstation
+  hosts: uwork
+  become: true
+  gather_facts: true
+
+  vars:
+      distribution: ansible_facts["distribution"]
+      msf_install_directory: "/opt/metasploit-framework"
+
+  tasks:
+    - name: Install common packages
+      include_role: 
+        name: common
+      vars:
+        pyenv: "yes"
+
+    - name: Install desktop packages
+      include_role: 
+        name: desktop
+      vars:
+        brave: "yes"
+        ipsec: "yes"
+        ipsec_subnet: "10.10.14.0/24"
+        ipsec_sourceip: "10.10.14.13"
+
+    

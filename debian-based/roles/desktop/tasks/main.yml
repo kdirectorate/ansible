@@ -1,0 +1,20 @@
+# Installs desktop apps
+- name: Install desktop packages for Debian/Ubuntu
+  apt:
+    pkg:
+      - nextcloud-desktop
+      - cherrytree
+    state: present
+
+- include_tasks: "{{ role_path }}/tasks/keepassxc.yml"
+
+- name: Install Brave if "brave" is "yes".
+  include_tasks: "{{ role_path }}/tasks/brave.yml"
+  when: "'yes' | lower in brave | default('') | lower"
+
+- name: Install IPSec if "ipsec" is "yes".
+  include_tasks: "{{ role_path }}/tasks/ipsec.yml"
+  vars:
+    ipsec_subnet: ipsec_subnet
+    ipsec_sourceip: ipsec_sourceip
+  when: "'yes' | lower in ipsec | default('') | lower"

@@ -1,0 +1,22 @@
+# Installs common packages
+- name: Install common packages for Debian/Ubuntu
+  apt:
+    pkg:
+    - build-essential
+    - git
+    - curl
+    - terminator
+    - pip
+    - wireshark
+    - openvpn
+    state: present
+    update_cache: true
+
+- name: Update alternatives for x-terminal-emulator
+  command: update-alternatives --set x-terminal-emulator /usr/bin/terminator
+
+- include_tasks: "{{ role_path }}/tasks/resolved.yml"
+
+- name: Install pyenv if "pyenv" is defined.
+  include_tasks: "{{ role_path }}/tasks/pyenv.yml"
+  when: "'yes' | lower in pyenv | default('') | lower"

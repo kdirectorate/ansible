@@ -1,0 +1,39 @@
+# Installs the libreswan package and configures it using the files in the
+# assets/ directory. 
+- name: Install libreswan
+  apt:
+    name: libreswan
+    state: present
+
+- name: Copy ipsec.conf
+  copy:
+    src: "~/.config/ipsec.conf"
+    dest: /etc/ipsec.conf
+
+- name: Copy ipsec.secrets and set permissions
+  copy:
+    src: ~/.config/ipsec.secrets
+    dest: /etc/ipsec.secrets
+    mode: "0600"
+
+- name: Configure leftsubnet and leftsourceip in ipsec.conf
+  lineinfile:
+    path: /etc/ipsec.conf
+    regexp: "^(#?\\s*leftsubnet=).*"
+    line: "        leftsubnet={{ ipsec_subnet }}"
+
+- lineinfile:
+    path: /etc/ipsec.conf
+    regexp: "^(#?\\s*leftsourceip=).*"
+    line: "        leftsourceip={{ ipsec_sourceip }}"
+
+- name: Ensure ipsec service is enabled
+  systemd:
+    name: ipsec
+    enabled: yes
+  ignore_errors: yes
+
+- name: restart ipsec
+  systemd:
+    name: ipsec
+    state: restarted
