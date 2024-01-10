@@ -56,9 +56,13 @@ tools in the Kali distribution.
 No special setup instructions here. If you run the playbook, you get some pentesting
 tools. It's that simple.
 
-
 ## Built With
 - Ansible
+
+## Future Updates
+
+- [ ] The pentest playbook isn't complete. Some repos Kali installs by default are
+not being installed.
 
 ## Author
 **Kirby Angell**
