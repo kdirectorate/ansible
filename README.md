@@ -22,10 +22,14 @@ To install Ansible on the controller box (also debian):
 Next you will need to setup an __inventory.yml__ file to describe your networked
 machines. The format of the file looks like this:
 
-ungrouped:
-    hosts:
-        imsai.local	ansible_port=22	ansible_user=hackerman
-        uwork.local	ansible_port=22	ansible_user=joesmith
+    ungrouped:
+        hosts:
+            imsai.local:
+                ansible_port: 22	
+                ansible_user: hackerman
+            uwork.local:
+                ansible_port: 22	
+                ansible_user: joesmith
 
 You can find more information about configuring your inventory [here](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups).
 
