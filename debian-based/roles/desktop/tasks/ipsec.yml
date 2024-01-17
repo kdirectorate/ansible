@@ -21,11 +21,15 @@
     path: /etc/ipsec.conf
     regexp: "^(#?\\s*leftsubnet=).*"
     line: "        leftsubnet={{ ipsec_subnet }}"
+    backrefs: yes
+    state: present
 
 - lineinfile:
     path: /etc/ipsec.conf
     regexp: "^(#?\\s*leftsourceip=).*"
     line: "        leftsourceip={{ ipsec_sourceip }}"
+    backrefs: yes
+    state: present
 
 - name: Ensure ipsec service is enabled
   systemd:

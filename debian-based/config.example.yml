@@ -1,0 +1,5 @@
+ipsec_subnet: "10.11.13.0/24"
+ipsec_sourceip: "10.11.13.23"
+git_user_name: itsame
+git_email: mario@bowzer.castle.com
+msf_install_directory: "/opt/metasploit-framework"

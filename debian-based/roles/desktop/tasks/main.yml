@@ -4,8 +4,10 @@
     pkg:
       - nextcloud-desktop
       - cherrytree
+      - copyq
     state: present
 
+- include_tasks: "{{ role_path }}/tasks/pip-packages.yml"
 - include_tasks: "{{ role_path }}/tasks/keepassxc.yml"
 
 - name: Install Brave if "brave" is "yes".

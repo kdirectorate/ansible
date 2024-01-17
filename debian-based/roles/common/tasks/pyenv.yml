@@ -31,6 +31,8 @@
     - 'eval "$(pyenv virtualenv-init -)"'
   when: ansible_env.SHELL == "/bin/bash"
   become_user: "{{ ansible_user }}"
+  notify:
+    - reload bashrc
 
 - name: Add pyenv to shell profile for zsh
   lineinfile:
@@ -45,6 +47,8 @@
     - 'eval "$(pyenv virtualenv-init -)"'
   when: ansible_env.SHELL == "/bin/zsh"
   become_user: "{{ ansible_user }}"
+  notify:
+    - reload zshrc
 
 - name: Clone pyenv-virtualenv plugin
   git:

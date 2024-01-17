@@ -9,6 +9,8 @@
     - pip
     - wireshark
     - openvpn
+    - pkg-config 
+    - libssl-dev
     state: present
     update_cache: true
 
@@ -20,3 +22,7 @@
 - name: Install pyenv if "pyenv" is defined.
   include_tasks: "{{ role_path }}/tasks/pyenv.yml"
   when: "'yes' | lower in pyenv | default('') | lower"
+
+- name: Install rust if "rust" is defined.
+  include_tasks: "{{ role_path }}/tasks/rust.yml"
+  when: "'yes' | lower in rust | default('') | lower"

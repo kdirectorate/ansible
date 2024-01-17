@@ -1,0 +1,32 @@
+- name: Install golang
+  include_role: 
+    name: gantsign.golang
+  vars:
+    golang_gopath: '$HOME/go'
+
+- name: Setup Bash Environment
+  lineinfile:
+    path: "~/.bashrc"
+    line: "{{ item }}"
+    insertafter: EOF
+    create: yes
+  loop:
+    - 'export GOROOT=/usr/lib/go'
+    - 'export GOPATH=$HOME/go'
+    - 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
+  when: ansible_env.SHELL == "/bin/bash"
+  become_user: "{{ ansible_user }}"
+
+- name: Setup Zsh Environment
+  lineinfile:
+    path: "~/.zshrc"
+    line: "{{ item }}"
+    insertafter: EOF
+    create: yes
+  loop:
+    - 'export GOROOT=/usr/lib/go'
+    - 'export GOPATH=$HOME/go'
+    - 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
+  when: ansible_env.SHELL == "/bin/zsh"
+  become_user: "{{ ansible_user }}"
+
