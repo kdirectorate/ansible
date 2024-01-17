@@ -1,7 +1,7 @@
 <h1 align="center">Personal Ansible Playbooks</h1>
 
 <p align="center">Ansible Playbooks and Roles to setup Ubuntu/Debian systems the way I like.
-Mostly these are used for Virtual Machines I use in daily work projects.</p>
+Mostly these are used for Virtual Machines I use in my daily work.</p>
 
 ## debian-based
 

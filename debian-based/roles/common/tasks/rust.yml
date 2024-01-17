@@ -3,29 +3,3 @@
   when: "'~/.cargo/bin/cargo' is not file"
   become_user: "{{ ansible_user }}"
 
-- name: Add Rust to shell profile
-  lineinfile:
-    path: "~/.bashrc"
-    line: "{{ item }}"
-    insertafter: EOF
-    create: yes
-  loop:
-    - '[[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"'
-  when: ansible_env.SHELL == "/bin/bash"
-  become_user: "{{ ansible_user }}"
-  notify:
-    - reload bashrc
-
-- name: Add pyenv to shell profile for zsh
-  lineinfile:
-    path: "~/.zshrc"
-    line: "{{ item }}"
-    insertafter: EOF
-    create: yes
-  loop:
-    - '[[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"'
-  when: ansible_env.SHELL == "/bin/zsh"
-  become_user: "{{ ansible_user }}"
-  notify:
-    - reload zshrc
-
