@@ -18,6 +18,22 @@ To install Ansible on the controller box (also debian):
     sudo apt update
     sudo apt install ansible
 
+### Inventory
+Next you will need to setup an __inventory.ini__ file to describe your networked
+machines. The format of the file looks like this:
+
+[pentest]
+imsai.local	ansible_port=22	ansible_user=hackerman
+[uwork]
+uwork.local	ansible_port=22	ansible_user=joesmith
+
+### Configuration
+Various options in the playbooks are set in __config.yml__. The file
+__config.yml.example__ can be copied over to __config.yml__ to initialize
+the file. You will probably want to edit the file and set the values based
+on your situation.
+
+### Running a playbook
 To run one of the playbooks:
 
     ansible-playbook -i inventory.ini -K pentest-pb.yml --ask-become-pass
@@ -54,7 +70,7 @@ based it is pretty easy to setup an Ubuntu install to do pentesting using the sa
 tools in the Kali distribution.
 
 No special setup instructions here. If you run the playbook, you get some pentesting
-tools. It's that simple.
+tools. It's simple.
 
 ## Built With
 - Ansible
