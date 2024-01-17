@@ -19,13 +19,15 @@ To install Ansible on the controller box (also debian):
     sudo apt install ansible
 
 ### Inventory
-Next you will need to setup an __inventory.ini__ file to describe your networked
+Next you will need to setup an __inventory.yml__ file to describe your networked
 machines. The format of the file looks like this:
 
-[pentest]
-imsai.local	ansible_port=22	ansible_user=hackerman
-[uwork]
-uwork.local	ansible_port=22	ansible_user=joesmith
+ungrouped:
+    hosts:
+        imsai.local	ansible_port=22	ansible_user=hackerman
+        uwork.local	ansible_port=22	ansible_user=joesmith
+
+You can find more information about configuring your inventory [here](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups).
 
 ### Configuration
 Various options in the playbooks are set in __config.yml__. The file
@@ -36,7 +38,10 @@ on your situation.
 ### Running a playbook
 To run one of the playbooks:
 
-    ansible-playbook -i inventory.ini -K pentest-pb.yml --ask-become-pass
+    ansible-playbook -i inventory.yml -K pentest-pb.yml --ask-become-pass -l imsai
+
+This will run the playbook __pentest-pb.yml__ using the given inventory file and 
+limiting the run to only the "__imsai__" host.
 
 I don't do it, but if you configure your sudo user to not require a password you
 can take off the "--ask-become-pass". You will want to provide your own "inventory.ini"
