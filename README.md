@@ -10,6 +10,7 @@ You will need to have created a user and put your public key in the authorized_k
 for SSH access. That user will also need to be able to sudo. You can add them to
 the /etc/sudoers.d if they aren't already by logging in as root:
 
+    # As root
     echo "username ALL=(ALL:ALL) ALL" > /etc/sudoers.d/username
 
 To install Ansible on the controller box (also debian):
@@ -48,7 +49,7 @@ This will run the playbook __pentest-pb.yml__ using the given inventory file and
 limiting the run to only the "__imsai__" host.
 
 I don't do it, but if you configure your sudo user to not require a password you
-can take off the "--ask-become-pass". You will want to provide your own "inventory.ini"
+can take off the "--ask-become-pass". You will want to provide your own "inventory.yml"
 file of course and the -pb.yml files are good for me, but are at best a working example
 if you're trying to utilize these playbooks for yourself.
 
