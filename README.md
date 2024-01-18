@@ -7,10 +7,10 @@ Mostly these are used for Virtual Machines I use in my daily work.</p>
 
 These will take a bone stock Debian 11 or Ubuntu 22 install and configure them.
 You will need to have created a user and put your public key in the authorized_keys
-for SSH access. That user will also need to be able to sudo. You can add them to the
-sudoers group if they aren't already by logging in as root:
+for SSH access. That user will also need to be able to sudo. You can add them to
+the /etc/sudoers.d if they aren't already by logging in as root:
 
-    usermod -a -G sudoers username
+    echo "username ALL=(ALL:ALL) ALL" > /etc/sudoers.d/username
 
 To install Ansible on the controller box (also debian):
 
