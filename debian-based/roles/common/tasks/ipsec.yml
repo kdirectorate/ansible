@@ -1,3 +1,4 @@
+
 # Installs the libreswan package and configures it using the files in the
 # assets/ directory. 
 - name: Install libreswan
@@ -10,26 +11,36 @@
     src: "~/.config/ipsec.conf"
     dest: /etc/ipsec.conf
 
-- name: Copy ipsec.secrets and set permissions
-  copy:
-    src: ~/.config/ipsec.secrets
-    dest: /etc/ipsec.secrets
-    mode: "0600"
-
-- name: Configure leftsubnet and leftsourceip in ipsec.conf
+# There are 2 instances of leftsubnet and leftsourceip in the config file
+# but I could not craft the spell required to get lininfile to replace
+# them both. So the work around is to run the command twice with two
+# different keys, then replace both the key and value. There has to be 
+# a better way.
+- name: Configure leftsubnet in ipsec.conf
   lineinfile:
     path: /etc/ipsec.conf
-    regexp: "^(#?\\s*leftsubnet=).*"
+    regexp: "^(#?\\s*leftsubnet1=).*"
     line: "        leftsubnet={{ ipsec_subnet }}"
-    backrefs: yes
     state: present
 
-- lineinfile:
+- name: Configure leftsubnet in ipsec.conf
+  lineinfile:
     path: /etc/ipsec.conf
-    regexp: "^(#?\\s*leftsourceip=).*"
-    line: "        leftsourceip={{ ipsec_sourceip }}"
-    backrefs: yes
+    regexp: "^(#?\\s*leftsubnet2=).*"
+    line: "        leftsubnet={{ ipsec_subnet }}"
     state: present
+
+- name: Configure leftsourceip in ipsec.conf
+  lineinfile:
+      path: /etc/ipsec.conf
+      regexp: "^(#?\\s*leftsourceip1=).*"
+      line: "        leftsourceip={{ ipsec_sourceip }}"
+
+- name: Configure leftsourceip in ipsec.conf
+  lineinfile:
+      path: /etc/ipsec.conf
+      regexp: "^(#?\\s*leftsourceip2=).*"
+      line: "        leftsourceip={{ ipsec_sourceip }}"
 
 - name: Ensure ipsec service is enabled
   systemd:

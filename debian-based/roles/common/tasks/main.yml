@@ -15,9 +15,6 @@
 
 - name: Install IPSec if "ipsec" is "yes".
   include_tasks: "{{ role_path }}/tasks/ipsec.yml"
-  vars:
-    ipsec_subnet: ipsec_subnet
-    ipsec_sourceip: ipsec_sourceip
   when: "'yes' | lower in ipsec | default('') | lower"
 
 - include_tasks: "{{ role_path }}/tasks/resolved.yml"

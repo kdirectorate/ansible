@@ -66,8 +66,8 @@ For work purposes this installs and configures ipsec. You will have to
 provide configuration files for this that are not included in the repo for
 security reasons. Put the following files in ~/.local:
 
-- ipsec.conf
-- ipsec.secrets
+    - ipsec.conf
+    - ipsec.secrets
 
 More likely you aren't using _IPSec_ so you can turn off the install by setting the 
 "ipsec" var to "no" in the playbook. The playbook also installs _OpenVPN_, but without
