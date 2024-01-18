@@ -3,7 +3,7 @@
 <p align="center">Ansible Playbooks and Roles to setup Ubuntu/Debian systems the way I like.
 Mostly these are used for Virtual Machines I use in my daily work.</p>
 
-<script async id="asciicast-4EVZPM0UavK6IviNgOarA8Aod" src="https://asciinema.org/a/4EVZPM0UavK6IviNgOarA8Aod.js"></script>
+![demo](./assets/demo.gif)
 
 ## debian-based
 
