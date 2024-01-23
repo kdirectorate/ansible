@@ -4,3 +4,4 @@ git_user_name: itsame
 git_email: mario@bowzer.castle.com
 msf_install_directory: "/opt/metasploit-framework"
 burpsuite_version: "2023.11.1.5"
+hackthebox_config: "./files/htb.ovpn"
