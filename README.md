@@ -78,8 +78,13 @@ This I use for pentesting. I like Ubuntu more than Kali. Since they are both Deb
 based it is pretty easy to setup an Ubuntu install to do pentesting using the same
 tools in the Kali distribution.
 
-No special setup instructions here. If you run the playbook, you get some pentesting
-tools. It's simple.
+__HTB__
+If you have a Hack The Box OpenVPN configuration file (.ovpn) then you can specify
+it in your config.yml like so:
+
+    hackthebox_config: "./files/htb.ovpn"
+
+OpenVPN is installed by default. Your configuration file will be in ~/Downloads/.
 
 ## Built With
 - Ansible
