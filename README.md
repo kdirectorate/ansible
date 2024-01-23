@@ -79,6 +79,7 @@ based it is pretty easy to setup an Ubuntu install to do pentesting using the sa
 tools in the Kali distribution.
 
 __HTB__
+
 If you have a Hack The Box OpenVPN configuration file (.ovpn) then you can specify
 it in your config.yml like so:
 
