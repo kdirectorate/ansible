@@ -90,10 +90,5 @@ OpenVPN is installed by default. Your configuration file will be in ~/Downloads/
 ## Built With
 - Ansible
 
-## Future Updates
-
-- [ ] The pentest playbook isn't complete. Some repos Kali installs by default are
-not being installed.
-
 ## Author
 **Kirby Angell**
