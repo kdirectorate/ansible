@@ -20,3 +20,5 @@
     name: brave-browser
     state: present
 
+- name: Update alternatives for web browser
+  command: update-alternatives --set x-www-browser /usr/bin/brave-browser-stable
