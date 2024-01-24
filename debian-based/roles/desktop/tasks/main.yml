@@ -6,7 +6,6 @@
       - cherrytree
       - copyq
       - terminator
-      - codium
     state: present
 
 - name: Update alternatives for x-terminal-emulator
@@ -14,6 +13,7 @@
 
 - include_tasks: "{{ role_path }}/tasks/pip-packages.yml"
 - include_tasks: "{{ role_path }}/tasks/keepassxc.yml"
+- include_tasks: "{{ role_path }}/tasks/codium.yml"
 
 - name: Install Brave if "brave" is "yes".
   include_tasks: "{{ role_path }}/tasks/brave.yml"
