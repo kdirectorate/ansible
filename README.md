@@ -87,6 +87,11 @@ it in your config.yml like so:
 
 OpenVPN is installed by default. Your configuration file will be in ~/Downloads/.
 
+## To-Do
+
+[ ] Metasploit and feroxbuster are installed by scripts, and the scripts are
+getting run every time. It would be better if they only ran when needed.
+
 ## Built With
 - Ansible
 

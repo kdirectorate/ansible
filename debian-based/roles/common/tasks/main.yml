@@ -13,6 +13,32 @@
     state: present
     update_cache: true
 
+- name: Update PATH (bashrc)
+  lineinfile:
+    path: "~/.bashrc"
+    line: "{{ item }}"
+    insertafter: EOF
+    create: yes
+  loop:
+    - 'export PATH="~/.local/bin:$PATH"'
+  when: ansible_env.SHELL == "/bin/bash"
+  become_user: "{{ ansible_user }}"
+  notify:
+    - reload bashrc
+
+- name: Update PATH (zsh)
+  lineinfile:
+    path: "~/.zshrc"
+    line: "{{ item }}"
+    insertafter: EOF
+    create: yes
+  loop:
+    - 'export PATH="~/.local/bin:$PATH"'
+  when: ansible_env.SHELL == "/bin/zsh"
+  become_user: "{{ ansible_user }}"
+  notify:
+    - reload zshrc
+
 - name: Install IPSec if "ipsec" is "yes".
   include_tasks: "{{ role_path }}/tasks/ipsec.yml"
   when: "'yes' | lower in ipsec | default('') | lower"
