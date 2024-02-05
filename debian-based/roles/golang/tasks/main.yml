@@ -1,8 +1,19 @@
-- name: Install golang
-  include_role: 
-    name: gantsign.golang
-  vars:
-    golang_gopath: '$HOME/go'
+- name: Check for Golang package
+  stat:
+    path: "/tmp/golang.tar.gz"
+  register: goloang_package
+  become_user: "{{ ansible_user }}"
+
+- name: Download Golang if necessary
+  get_url:
+    url: "https://go.dev/dl/go1.21.6.linux-amd64.tar.gz"
+    dest: "/tmp/golang.tar.gz"
+    mode: "0755"  # Set the appropriate permissions
+  when: not golang_package.stat.exists
+  become_user: "{{ ansible_user }}"
+
+- name: Install Golang
+  shell: "rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/golang.tar.gz"
 
 - name: Setup Bash Environment
   lineinfile:
@@ -11,7 +22,7 @@
     insertafter: EOF
     create: yes
   loop:
-    - 'export GOROOT=/usr/lib/go'
+    - 'export GOROOT=/usr/local/go'
     - 'export GOPATH=$HOME/go'
     - 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
   when: ansible_env.SHELL == "/bin/bash"
@@ -24,7 +35,7 @@
     insertafter: EOF
     create: yes
   loop:
-    - 'export GOROOT=/usr/lib/go'
+    - 'export GOROOT=/usr/local/go'
     - 'export GOPATH=$HOME/go'
     - 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
   when: ansible_env.SHELL == "/bin/zsh"
