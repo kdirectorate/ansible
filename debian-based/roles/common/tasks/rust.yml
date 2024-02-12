@@ -3,3 +3,8 @@
   when: "'~/.cargo/bin/cargo' is not file"
   become_user: "{{ ansible_user }}"
 
+- name: Install x86_64-unknown-linux-musl target for Rust
+  shell: ~/.cargo/bin/rustup target add x86_64-unknown-linux-musl
+  become_user: "{{ ansible_user }}"
+
+
