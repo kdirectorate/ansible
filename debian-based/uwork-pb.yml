@@ -32,7 +32,8 @@
         # nushell takes a long time to install. You
         # probably want to comment this out unless
         # you really want to use it.
-        - nu
+        #- nu
+        - base64
 
     - name: Setup git global user
       become_user: "{{ ansible_user }}"
