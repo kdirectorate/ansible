@@ -65,7 +65,7 @@ This playbook sets up a basic environment. I use it to configure
 laptops as well as software development VMs that I spin up and throw
 away on a regular basis.
 
-You can use *run-laptop.sh* to execute the Playbook.
+You can use *run-local.sh* to execute the Playbook.
 
 ### (Playbook) uwork-pb:
 
