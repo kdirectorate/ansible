@@ -3,13 +3,13 @@
   apt_key:
     url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     state: present
-  when: ansible_distribution == 'Ubuntu'  # Add condition based on your OS distribution
+#  when: ansible_distribution == 'Ubuntu'  # Add condition based on your OS distribution
 
 - name: Add VSCodium repository
   apt_repository:
     repo: deb [arch=amd64] https://download.vscodium.com/debs vscodium main
     state: present
-  when: ansible_distribution == 'Ubuntu'  # Add condition based on your OS distribution
+#  when: ansible_distribution == 'Ubuntu'  # Add condition based on your OS distribution
 
 - name: Update apt package cache
   apt:
