@@ -1,5 +1,4 @@
-- name: Configure Laptop
-  hosts: localhost
+- name: Configure Workstation
   become: true
   gather_facts: true
 
@@ -20,18 +19,18 @@
       vars:
         brave: "yes"
 
-    - name: Install Rust packages
-      # The community cargo command isn't working here
-      # I think because it isn't playing attention
-      # to the "become_user".
-      become_user: "{{ ansible_user }}"
-      ansible.builtin.command:
-        cmd: "~/.cargo/bin/cargo install {{ item }}"
-      loop:
-        # nushell takes a long time to install. You
-        # probably want to comment this out unless
-        # you really want to use it.
-        - nu
+    # - name: Install Rust packages
+    #   # The community cargo command isn't working here
+    #   # I think because it isn't playing attention
+    #   # to the "become_user".
+    #   become_user: "{{ ansible_user }}"
+    #   ansible.builtin.command:
+    #     cmd: "~/.cargo/bin/cargo install {{ item }}"
+    #   loop:
+    #     # nushell takes a long time to install. You
+    #     # probably want to comment this out unless
+    #     # you really want to use it.
+    #     - nu
 
     - name: Setup git global user
       become_user: "{{ ansible_user }}"

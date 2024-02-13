@@ -14,6 +14,7 @@
         pyenv: "yes"
         rust: "yes"
         ipsec: "yes"
+        zshell: "yes"
 
     - name: Install desktop packages
       include_role: 

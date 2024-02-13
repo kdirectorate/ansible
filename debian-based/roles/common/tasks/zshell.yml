@@ -1,0 +1,48 @@
+# https://medium.com/tech-notes-and-geek-stuff/install-zsh-on-arch-linux-manjaro-and-make-it-your-default-shell-b0098b756a7a
+
+- name: Install zshell
+  apt:
+    pkg:
+    - zsh
+    state: present
+    update_cache: true
+
+- name: Copy default zshrc
+  copy:
+    src: "files/zshrc"
+    dest: "~/.zshrc"
+    creates: "~/.zshrc"
+
+- name: Download the OhMyZsh installer
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/ohmyzsh
+    mode: 0755
+
+- name: Install OhMyZsh
+  ansible.builtin.command:
+    cmd: /tmp/ohmyzsh --unattended
+  become_user: "{{ ansible_user }}"
+
+- name: Delete the OhMyZsh installer 
+  ansible.builtin.file:
+    path: /tmp/ohmyzsh
+    state: absent
+
+- name: Load GitHub repo list
+  set_fact:
+    ohmyzsh_plugins: "{{ lookup('file', 'files/ohmyzsh_plugins.json') | from_json }}"
+
+- name: Install OhMyZsh plugins
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version | default('master') }}"
+    force: yes
+  loop: "{{ ohmyzsh_plugins }}"
+  become_user: "{{ ansible_user }}"
+
+- name: Set users shell
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh  

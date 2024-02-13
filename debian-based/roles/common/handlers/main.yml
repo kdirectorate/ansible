@@ -5,8 +5,8 @@
 
 - name: reload bashrc
   become_user: "{{ ansible_user }}"
-  command: "source $HOME/.bashrc"
+  command: "source ~/.bashrc"
 
 - name: reload zshrc
   become_user: "{{ ansible_user }}"
-  command: "source $HOME/.zshrc"
+  command: "source ~/.zshrc"
