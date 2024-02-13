@@ -59,11 +59,11 @@ The playbooks themselves are relatively short with most of the work done in the
 roles. You can turn off 'features' by editing the variables in the playbooks. Just
 set the options variables to anything besides "yes" to turn that option off.
 
-### (Playbook) laptop-pb
+### (Playbook) baremetal-pb
 
-Similar to my work install, just without the ipsec stuff. This Playbook
-is meant to be run to configure a local computer. This is the computer
-I use as the Ansible controller for all the rest.
+This playbook sets up a basic environment. I use it to configure
+laptops as well as software development VMs that I spin up and throw
+away on a regular basis.
 
 You can use *run-laptop.sh* to execute the Playbook.
 
