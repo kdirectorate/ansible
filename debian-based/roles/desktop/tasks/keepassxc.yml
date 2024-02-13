@@ -1,15 +1,31 @@
 # Install KeepassXC
+
+# This section does Debian
+- name: Add Flathub remote
+  command: flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  become_user: "{{ ansible_user }}"
+  when: ansible_distribution == 'Debian'
+
+- name: Install KeepassXC
+  command: flatpak install --noninteractive --user flathub org.keepassxc.KeePassXC
+  become_user: "{{ ansible_user }}"
+  when: ansible_distribution == 'Debian'
+
+# This section does Ubuntu
+
 - name: Add KeepassXC repository
   apt_repository:
     repo: ppa:phoerious/keepassxc
     state: present
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Update apt package cache
   apt:
     update_cache: "yes"
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Install KeepassXC
   apt:
     name: keepassxc
     state: present
-
+  when: ansible_distribution == 'Ubuntu'

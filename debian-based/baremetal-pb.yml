@@ -1,4 +1,5 @@
 - name: Configure Workstation
+  hosts: basicdev
   become: true
   gather_facts: true
 
@@ -6,12 +7,18 @@
     - config.yml
 
   tasks:
+
+    - name: Display ansible_distribution fact
+      debug:
+        var: ansible_distribution
+
     - name: Install common packages
       include_role: 
         name: common
       vars:
         pyenv: "yes"
         rust: "yes"
+        zshell: "yes"
 
     - name: Install desktop packages
       include_role: 

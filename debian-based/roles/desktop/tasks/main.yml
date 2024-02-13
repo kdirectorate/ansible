@@ -6,6 +6,7 @@
       - cherrytree
       - copyq
       - terminator
+      - flatpak
     state: present
 
 - name: Update alternatives for x-terminal-emulator

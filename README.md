@@ -63,9 +63,11 @@ set the options variables to anything besides "yes" to turn that option off.
 
 This playbook sets up a basic environment. I use it to configure
 laptops as well as software development VMs that I spin up and throw
-away on a regular basis.
+away on a regular basis. This is essentially my Ansible Controller
+setup as well.
 
-You can use *run-local.sh* to execute the Playbook.
+You can use *run-local.sh* to execute the Playbook on the local
+computer.
 
 ### (Playbook) uwork-pb:
 
