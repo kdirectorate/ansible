@@ -12,3 +12,10 @@
     #- { regex: "DNS=", line: "DNS={{ dns_ip }}" }
     - { regex: "DNSStubListener=", line: "DNSStubListener=no" }
   notify: restart systemd-resolved
+
+- name: Set hosts option in nsswitch.conf
+  lineinfile:
+    path: /etc/nsswitch.conf
+    regexp: '^hosts:'
+    line: 'hosts: files dns mymachines'
+    state: present
