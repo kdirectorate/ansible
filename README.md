@@ -59,7 +59,7 @@ The playbooks themselves are relatively short with most of the work done in the
 roles. You can turn off 'features' by editing the variables in the playbooks. Just
 set the options variables to anything besides "yes" to turn that option off.
 
-### (Playbook) baremetal-pb
+### (Playbook) basicdev
 
 This playbook sets up a basic environment. I use it to configure
 laptops as well as software development VMs that I spin up and throw
@@ -69,7 +69,7 @@ setup as well.
 You can use *run-local.sh* to execute the Playbook on the local
 computer.
 
-### (Playbook) uwork-pb:
+### (Playbook) uwork:
 
 For work purposes this installs and configures ipsec. You will have to
 provide configuration files for this that are not included in the repo for
@@ -82,7 +82,7 @@ More likely you aren't using _IPSec_ so you can turn off the install by setting 
 "ipsec" var to "no" in the playbook. The playbook also installs _OpenVPN_, but without
 a configuration so you would need to provide that.
 
-### (Playbook) pentest-pb
+### (Playbook) pentest
 
 This I use for pentesting. I like Ubuntu more than Kali. Since they are both Debian
 based it is pretty easy to setup an Ubuntu install to do pentesting using the same
