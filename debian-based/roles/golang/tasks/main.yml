@@ -1,7 +1,7 @@
 - name: Check for Golang package
   stat:
     path: "/tmp/golang.tar.gz"
-  register: goloang_package
+  register: golang_package
   become_user: "{{ ansible_user }}"
 
 - name: Download Golang if necessary
