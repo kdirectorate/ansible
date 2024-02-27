@@ -7,7 +7,14 @@
       - copyq
       - terminator
       - flatpak
+      - gnome-software-plugin-flatpak
     state: present
+
+# TODO: might make this a default later.
+# flatpak install flathub md.obsidian.Obsidian
+
+- name: Flathub repository
+  command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 - name: Update alternatives for x-terminal-emulator
   command: update-alternatives --set x-terminal-emulator /usr/bin/terminator

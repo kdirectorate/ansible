@@ -12,8 +12,7 @@
     - pip
     - wireshark
     - openvpn
-    - pkg-config 
-    - libssl-dev
+    - net-tools
     state: present
     update_cache: true
 

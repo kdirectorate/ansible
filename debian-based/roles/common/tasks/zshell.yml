@@ -4,6 +4,7 @@
   apt:
     pkg:
     - zsh
+    - fzf
     state: present
     update_cache: true
 
