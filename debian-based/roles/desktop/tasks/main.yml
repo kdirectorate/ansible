@@ -27,3 +27,7 @@
   include_tasks: "{{ role_path }}/tasks/brave.yml"
   when: "'yes' | lower in brave | default('') | lower"
 
+- name: Install Signal if "signal" is "yes".
+  include_tasks: "{{ role_path }}/tasks/signal.yml"
+  when: "'yes' | lower in signal | default('') | lower"
+

@@ -12,18 +12,25 @@
   copy:
     src: "files/zshrc"
     dest: "~/.zshrc"
-    creates: "~/.zshrc"
+    force: false
+
+- name: Check if file exists
+  stat:
+    path: "/home/{{ ansible_user }}/.oh-my-zsh"
+  register: ohmyzshfound
 
 - name: Download the OhMyZsh installer
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: /tmp/ohmyzsh
     mode: 0755
+  when: not ohmyzshfound.stat.exists
 
 - name: Install OhMyZsh
   ansible.builtin.command:
     cmd: /tmp/ohmyzsh --unattended
   become_user: "{{ ansible_user }}"
+  when: not ohmyzshfound.stat.exists
 
 - name: Delete the OhMyZsh installer 
   ansible.builtin.file:
@@ -45,5 +52,5 @@
 
 - name: Set users shell
   user:
-    name: "{{ username }}"
+    name: "{{ ansible_user }}"
     shell: /bin/zsh  
