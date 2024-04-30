@@ -1,20 +1,24 @@
-- name: Add Signal GPG Key
-  ansible.builtin.get_url:
-    url: "https://updates.signal.org/desktop/apt/keys.asc"
-    dest: /etc/apt/trusted.gpg.d/signal-keys.asc
-    mode: '0644'
-    force: true
+# This is still in testing. Might break or even come pre-broken.
+
+- name: Import Signal Messenger GPG key
+  command: >
+    wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > /usr/share/keyrings/signal-desktop-keyring.gpg
+  args:
+    creates: "/usr/share/keyrings/signal-desktop-keyring.gpg"
+  delegate_to: localhost
 
 - name: Add Signal repository
   apt_repository:
     repo: deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
     state: present
 
-- name: Update apt package cache
+- name: Update package lists
   apt:
-    update_cache: "yes"
+    update_cache: yes
+    cache_valid_time: 3600 # Cache valid for 1 hour
 
-- name: Install Signal
+- name: Install Signal Messenger
   apt:
-    name: signal-desktop
+    name: "signal-desktop"
     state: present
+    update_cache: yes
