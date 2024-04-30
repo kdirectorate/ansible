@@ -42,6 +42,29 @@ __config.yml.example__ can be copied over to __config.yml__ to initialize
 the file. You will probably want to edit the file and set the values based
 on your situation.
 
+### Bootstrap
+To get a new machine bootstrapped as the Ansible controller follow these steps:
+
+    sudo apt install git, openssh-server, ansible
+
+    git clone https://github.com/kdirectorate/ansible.git
+    cd ansible/debian-based
+    copy config/config.example.yml config/config.yml
+    editor config/config.yml
+
+    touch files/htp.ovpn
+
+    cat <<EOF
+    ungrouped:
+    hosts:
+        uwork:
+        ansible_connection: local 
+        ansible_user: <yourusername>
+    EOF
+
+    ansible-playbook --ask-become-pass -i inventory.yml -K uwork.yml -l uwork
+
+
 ### Running a playbook
 To run one of the playbooks:
 
