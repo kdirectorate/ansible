@@ -8,12 +8,6 @@
     state: present
     update_cache: true
 
-- name: Copy default zshrc
-  copy:
-    src: "files/zshrc"
-    dest: "~/.zshrc"
-    force: false
-
 - name: Check if file exists
   stat:
     path: "/home/{{ ansible_user }}/.oh-my-zsh"
@@ -37,6 +31,12 @@
     path: /tmp/ohmyzsh
     state: absent
 
+- name: Copy default zshrc
+  copy:
+    src: "files/zshrc"
+    dest: "~/.zshrc"
+    force: false
+  
 - name: Load GitHub repo list
   set_fact:
     ohmyzsh_plugins: "{{ lookup('file', 'files/ohmyzsh_plugins.json') | from_json }}"

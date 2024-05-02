@@ -16,6 +16,10 @@
     state: present
     update_cache: true
 
+- name: Install Zshell if "zshell" is "yes".
+  include_tasks: "{{ role_path }}/tasks/zshell.yml"
+  when: "'yes' | lower in zshell | default('') | lower"
+
 - name: Update PATH (bashrc)
   lineinfile:
     path: "~/.bashrc"
@@ -41,10 +45,6 @@
   become_user: "{{ ansible_user }}"
   notify:
     - reload zshrc
-
-- name: Install Zshell if "zshell" is "yes".
-  include_tasks: "{{ role_path }}/tasks/zshell.yml"
-  when: "'yes' | lower in ipsec | default('') | lower"
 
 - name: Install IPSec if "ipsec" is "yes".
   include_tasks: "{{ role_path }}/tasks/ipsec.yml"

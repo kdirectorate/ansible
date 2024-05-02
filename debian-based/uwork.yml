@@ -29,6 +29,25 @@
           - docker.io
           - tcpdump
           - libpcap0.8-dev
+          - qemu-utils 
+          - qemu-system-x86 
+          - qemu-system-gui
+          - libvirt-clients
+          - libvirt-daemon-system
+          - bridge-utils
+          - virtinst
+          - libvirt-daemon
+          - virt-manager
+
+    - name: Add user to several groups using a loop
+      command: usermod -aG "{{ item }}" {{ ansible_user }}
+      with_items:
+        - libvirt
+        - libvirt-qemu
+        - kvm
+        - input
+        - disk
+      delegate_to: localhost
 
     # - name: Install Rust packages
     #   # The community cargo command isn't working here
