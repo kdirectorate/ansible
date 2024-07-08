@@ -54,12 +54,12 @@ To get a new machine bootstrapped as the Ansible controller follow these steps:
 
     touch files/htp.ovpn
 
-    cat <<EOF
+    cat <<EOF > inventory.yml
     ungrouped:
-    hosts:
-        uwork:
-        ansible_connection: local 
-        ansible_user: <yourusername>
+        hosts:
+            uwork:
+            ansible_connection: local 
+            ansible_user: <yourusername>
     EOF
 
     ansible-playbook --ask-become-pass -i inventory.yml -K uwork.yml -l uwork
