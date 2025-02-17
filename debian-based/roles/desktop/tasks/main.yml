@@ -8,6 +8,8 @@
       - terminator
       - flatpak
       - gnome-software-plugin-flatpak
+      - pipx
+      - python3-ipykernel
     state: present
 
 # TODO: might make this a default later.
@@ -19,7 +21,7 @@
 - name: Update alternatives for x-terminal-emulator
   command: update-alternatives --set x-terminal-emulator /usr/bin/terminator
 
-- include_tasks: "{{ role_path }}/tasks/pip-packages.yml"
+#- include_tasks: "{{ role_path }}/tasks/pip-packages.yml"
 - include_tasks: "{{ role_path }}/tasks/keepassxc.yml"
 - include_tasks: "{{ role_path }}/tasks/codium.yml"
 
