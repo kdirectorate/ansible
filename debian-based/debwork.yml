@@ -1,5 +1,5 @@
 - name: Configure Workstation
-  hosts: uwork
+  hosts: debwork
   become: true
   gather_facts: true
 
@@ -21,7 +21,7 @@
         name: desktop
       vars:
         brave: "no"
-        signal: "yes"
+        signal: "no"
 
     - name: Install other packages 
       apt:
@@ -29,39 +29,13 @@
           - docker.io
           - tcpdump
           - libpcap0.8-dev
-          - qemu-utils 
-          - qemu-system-x86 
-          - qemu-system-gui
-          - libvirt-clients
-          - libvirt-daemon-system
-          - bridge-utils
-          - virtinst
-          - libvirt-daemon
-          - virt-manager
 
     - name: Add user to several groups using a loop
       command: usermod -aG "{{ item }}" {{ ansible_user }}
       with_items:
-        - libvirt
-        - libvirt-qemu
-        - kvm
         - input
         - disk
       delegate_to: localhost
-
-    # - name: Install Rust packages
-    #   # The community cargo command isn't working here
-    #   # I think because it isn't playing attention
-    #   # to the "become_user".
-    #   become_user: "{{ ansible_user }}"
-    #   ansible.builtin.command:
-    #     cmd: "~/.cargo/bin/cargo install {{ item }}"
-    #   loop:
-    #     # nushell takes a long time to install. You
-    #     # probably want to comment this out unless
-    #     # you really want to use it.
-    #     #- nu
-    #     - base64
 
     - name: Setup git global user
       become_user: "{{ ansible_user }}"

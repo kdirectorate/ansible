@@ -7,12 +7,19 @@
   apt:
     pkg:
     - build-essential
-    - git
+    - git-all
     - curl
     - pip
     - wireshark
     - openvpn
     - net-tools
+    - cowsay
+    - fortune
+    - calendar
+    - bastet
+    - rig
+    - autojump
+    - fzf
     state: present
     update_cache: true
 
@@ -50,7 +57,7 @@
   include_tasks: "{{ role_path }}/tasks/ipsec.yml"
   when: "'yes' | lower in ipsec | default('') | lower"
 
-- include_tasks: "{{ role_path }}/tasks/resolved.yml"
+#- include_tasks: "{{ role_path }}/tasks/resolved.yml"
 
 - name: Install pyenv if "pyenv" is defined.
   include_tasks: "{{ role_path }}/tasks/pyenv.yml"

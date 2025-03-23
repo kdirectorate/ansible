@@ -5,8 +5,10 @@
 
 - name: reload bashrc
   become_user: "{{ ansible_user }}"
+  when: ansible_env.SHELL == "/bin/bash"
   command: "source ~/.bashrc"
 
 - name: reload zshrc
   become_user: "{{ ansible_user }}"
+  when: ansible_env.SHELL == "/bin/zsh"
   command: "source ~/.zshrc"
